@@ -22,6 +22,7 @@ class Voter(db.Model):
     name = db.Column(db.Text)
     email = db.Column(db.Text)
     position_name = db.Column(db.Text)
+    password = db.Column(db.Text)
 	# username = db.Column(String(256))
 
     def __repr__(self):

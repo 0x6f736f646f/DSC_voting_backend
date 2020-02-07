@@ -15,15 +15,16 @@ class Query(graphene.ObjectType):
 class CreateVoter(graphene.Mutation):
     class Arguments:
         username = graphene.String(required=True)
+        password = graphene.String(required=True)
         email = graphene.String(required=True)
         name = graphene.String(required=True)
         position_name = graphene.String(required=True)
     
     voter = graphene.Field(lambda: VoterObject)
 
-    def mutate(self, info, username, name, email, position_name):
+    def mutate(self, info, username, name, email, position_name, password):
         voter = Voter.query.filter_by(username=username).first()
-        use = Voter(username=username, email=email, name=name, position_name=position_name)
+        use = Voter(username=username, email=email, name=name, position_name=position_name, password=password)
         db.session.add(use)
         db.session.commit()
         return CreateVoter(voter=use)
